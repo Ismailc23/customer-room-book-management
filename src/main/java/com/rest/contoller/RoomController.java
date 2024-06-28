@@ -57,7 +57,8 @@ public class RoomController {
 
     @DeleteMapping("request/{roomNumber}")
     public ResponseEntity<?> deleteRoom(@PathVariable Long roomNumber) {
-        try {   boolean deletedRoom = roomService.deleteRoom(roomNumber);
+        try {
+            boolean deletedRoom = roomService.deleteRoom(roomNumber);
             return ResponseEntity.status(HttpStatus.OK).body("Deleted the room successfully");
         }
         catch(RoomNotFoundException e) {

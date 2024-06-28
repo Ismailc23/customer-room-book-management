@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Rooms</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/style3.css">
+    <style>
+        .room-card {
+            margin-bottom: 20px;
+        }
+        .room-photo {
+            max-height: 200px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-center">Available Rooms</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 center-text">
+            <p>Available rooms for dates: <span th:text="${stayStartDate} + ' to ' + ${stayEndDate}"></span></p>
+        </div>
+        <div th:each="room : ${availableRooms}" class="col-md-4">
+            <div class="card room-card">
+                <img th:src="@{${room.photoUrl}}" class="card-img-top room-photo" alt="Room Photo">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${room.roomNumber}">Room Number</h5>
+                    <h5 class="card-title" th:text="${room.type}"></h5>
+                    <p class="card-text" th:text="${room.description}"></p>
+                    <p class="card-text"><strong>Price: </strong><span th:text="${room.price}"></span></p>
+                    <a href="#" class="btn btn-primary">Book It</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

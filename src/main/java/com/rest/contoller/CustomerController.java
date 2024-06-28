@@ -1,7 +1,7 @@
 package com.rest.contoller;
 
 import com.rest.ExceptionHandling.CustomerExceptions.CustomerNotFoundException;
-import com.rest.ExceptionHandling.CustomerExceptions.InvalidAgeCustomerException;
+import com.rest.ExceptionHandling.CustomerExceptions.InvalidAgeException;
 import com.rest.ExceptionHandling.CustomerExceptions.UserNameAlreadyExistException;
 import com.rest.services.CustomerService;
 import com.rest.Entity.CustomerEntity;
@@ -27,12 +27,8 @@ public class CustomerController {
             log.debug("Customer is created");
             return ResponseEntity.status(HttpStatus.CREATED).body(createdCustomer);
         }
-        catch (InvalidAgeCustomerException e) {
+        catch (InvalidAgeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-        catch (UserNameAlreadyExistException e) {
-            log.error("Username already exist");
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
     }
 
@@ -56,7 +52,7 @@ public class CustomerController {
             CustomerEntity updatedCustomer = customerService.updateCustomer(customer);
             return ResponseEntity.status(HttpStatus.OK).body(updatedCustomer);
         }
-        catch (UserNameAlreadyExistException | InvalidAgeCustomerException e) {
+        catch (UserNameAlreadyExistException | InvalidAgeException e) {
             log.error("Customer is not present with Id : {}", id);
             return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body(e.getMessage());
         }

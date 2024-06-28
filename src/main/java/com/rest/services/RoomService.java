@@ -7,6 +7,9 @@ import com.rest.Repository.RoomRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -26,12 +29,20 @@ public class RoomService {
         return room;
     }
 
+    public List<RoomEntity> findAvailableRooms(LocalDate stayStartDate, LocalDate stayEndDate) {
+        return roomRepository.findAvailableRooms(stayStartDate, stayEndDate);
+    }
+
     public Optional<RoomEntity> getRoomById(Long id) {
         Optional<RoomEntity> getRoom = roomRepository.findById(id);
         if(!getRoom.isPresent()) {
             throw new RoomNotFoundException("Room number "+id+" is not present");
         }
         return roomRepository.findById(id);
+    }
+
+    public List<RoomEntity> getAllRooms() {
+        return roomRepository.findAll();
     }
 
     public RoomEntity updateRoom(RoomEntity room) {

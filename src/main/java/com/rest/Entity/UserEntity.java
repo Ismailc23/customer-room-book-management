@@ -1,6 +1,7 @@
 package com.rest.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Data;
 
 @Entity
@@ -14,6 +15,11 @@ public class UserEntity {
 
     private String userName;
     private String password;
+
+    @Email
+    private String email;
+
+    private long phoneNo;
     private String firstName;
     private String lastName;
 }

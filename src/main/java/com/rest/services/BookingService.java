@@ -96,9 +96,7 @@ public class BookingService {
                 if (bookingPatchDTO.getStayEndDate() != null) {
                     booking.setStayEndDate(bookingPatchDTO.getStayEndDate());
                 }
-                log.info("Patch Booked Date : {}",bookingPatchDTO.getBookedDate());
-                log.info("Patch Start Date : {}",bookingPatchDTO.getStayStartDate());
-                log.info("Patch End Date : {}",bookingPatchDTO.getStayEndDate());
+                log.info("Patch Dates : Booking Date : {} , Start Date : {} ,  End Date : {}",bookingPatchDTO.getBookedDate(),bookingPatchDTO.getStayStartDate(),bookingPatchDTO.getStayEndDate());
                 return bookingRepository.save(booking);
             }
             return null;

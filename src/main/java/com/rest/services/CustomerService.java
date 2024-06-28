@@ -1,18 +1,18 @@
 package com.rest.services;
 
 import com.rest.Entity.CustomerEntity;
+import com.rest.Entity.RoomEntity;
 import com.rest.ExceptionHandling.CustomerExceptions.CustomerNotFoundException;
-import com.rest.ExceptionHandling.CustomerExceptions.InvalidAgeCustomerException;
-import com.rest.ExceptionHandling.CustomerExceptions.UserNameAlreadyExistException;
+import com.rest.ExceptionHandling.CustomerExceptions.InvalidAgeException;
 import com.rest.Repository.BookingRepository;
 import com.rest.Repository.CustomerRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.ZoneId;;
+;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -27,7 +27,7 @@ public class CustomerService {
 
     public boolean isCustomerAbove18(CustomerEntity customer) {
         LocalDate current = LocalDate.now();
-        LocalDate dateOfBirth = customer.getDateOfBirth().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate dateOfBirth = customer.getDateOfBirth();
         int age = Period.between(dateOfBirth, current).getYears();
         log.info("Age of the customer : {}", age );
         return age > 18;
@@ -36,7 +36,7 @@ public class CustomerService {
     public CustomerEntity createCustomer(CustomerEntity customer) {
         if(!isCustomerAbove18(customer)) {
             log.debug("Age is under 18");
-            throw new InvalidAgeCustomerException("Customer must be above 18 years old");
+            throw new InvalidAgeException("Customer must be above 18 years old");
         }
         customerRepository.save(customer);
         log.debug("Customer is saved Successfully : {}",customer);
@@ -53,6 +53,10 @@ public class CustomerService {
         }
     }
 
+    public List<CustomerEntity> getAllCustomers() {
+        return customerRepository.findAll();
+    }
+
     public CustomerEntity updateCustomer(CustomerEntity customer) {
         Optional<CustomerEntity> existCustomer = customerRepository.findById(customer.getCustomerId());
         if (!existCustomer.isPresent()) {
@@ -61,7 +65,7 @@ public class CustomerService {
         }
         if(!isCustomerAbove18(customer)) {
             log.debug("Age tryin to update is under 18");
-            throw new InvalidAgeCustomerException("Customer must be above 18 years old");
+            throw new InvalidAgeException("Customer must be above 18 years old");
         }
         customerRepository.save(customer);
         log.debug("Customer is updated Successfully : {}",customer);

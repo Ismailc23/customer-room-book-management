@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Form</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
+  <style>
+    body {
+        background: linear-gradient(to right, #3a1c71, #d76d77, #ffaf7b);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+    }
+    .card {
+        background: rgba(0, 0, 0, 0.8);
+        padding: 20px;
+        border-radius: 15px;
+        width: 500px;
+        box-shadow: 0px 0px 10px 0px #000;
+    }
+    h2,label {
+        color:white;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.querySelector("form");
+        form.addEventListener("submit", function(event) {
+            const dateOfBirth = document.getElementById("dateOfBirth").value;
+            if (!isCustomerAbove18(dateOfBirth)) {
+                event.preventDefault();
+                alert("Customer must be above 18 years old to submit the form.");
+            }
+        });
+        function isCustomerAbove18(dateOfBirth) {
+            const currentDate = new Date();
+            const birthDate = new Date(dateOfBirth);
+            const age = currentDate.getFullYear() - birthDate.getFullYear();
+            return age >= 18;
+        }
+    });
+  </script>
+</head>
+<body>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header justify-content: center">
+          <h2>Customer Form</h2>
+        </div>
+        <div class="card-body">
+          <form th:action="@{/customerCreation}" th:object="${customer}" method="post">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" id="firstname" class="form-control" th:field="*{firstName}" required>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" id="lastName" class="form-control" th:field="*{lastName}" required>
+            </div>
+            <div class="form-group">
+              <label>Date Of Birth</label>
+              <input type="date" id="dateOfBirth" class="form-control" th:field="*{dateOfBirth}" required>
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" id="email" class="form-control" th:field="*{email}" required>
+            </div>
+            <div class="form-group text-center">
+              <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

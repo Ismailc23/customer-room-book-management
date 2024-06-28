@@ -15,4 +15,5 @@ public interface BookingRepository extends JpaRepository<BookingEntity, Long> {
 
     @Query("SELECT b FROM BookingEntity b WHERE b.room.roomNumber = :roomNumber AND b.stayStartDate <= :stayEndDate AND b.stayEndDate >= :stayStartDate")
     List<BookingEntity> findOverlapBookings(@Param("roomNumber") Long roomNumber, @Param("stayEndDate") LocalDate stayEndDate, @Param("stayStartDate") LocalDate stayStartDate);
+
 }

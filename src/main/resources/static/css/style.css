@@ -1,87 +1,78 @@
-@import url('https://fonts.googleapis.com/css?family=Numans');
-
-html,body{
-background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
-background-size: cover;
-background-repeat: no-repeat;
-height: 100%;
-font-family: 'Numans', sans-serif;
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #3a1c71, #d76d77, #ffaf7b);
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.container{
-height: 100%;
-align-content: center;
+.container {
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-.card{
-height: 370px;
-margin-top: auto;
-margin-bottom: auto;
-width: 400px;
-background-color: rgba(0,0,0,0.5) !important;
+.card {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 15px;
+    width: 500px;
+    box-shadow: 0px 0px 10px 0px #000;
 }
 
-.social_icon span{
-font-size: 60px;
-margin-left: 10px;
-color: #FFC312;
+.card-header h3 {
+    color: #fff;
+    align-content: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 10px;
 }
 
-.social_icon span:hover{
-color: white;
-cursor: pointer;
+.input-group.form-group {
+    margin-bottom: 15px;
 }
 
-.card-header h3{
-color: white;
+.input-group.form-group .form-control {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: none;
+    padding: 15px;
 }
 
-.social_icon{
-position: absolute;
-right: 20px;
-top: -45px;
+.input-group.form-group .form-control::placeholder {
+    color: #aaa;
 }
 
-.input-group-prepend span{
-width: 50px;
-background-color: #FFC312;
-color: black;
-border:0 !important;
+.input-group.form-group .form-control:focus {
+    box-shadow: none;
+    border: 1px solid #fff;
 }
 
-input:focus{
-outline: 0 0 0 0  !important;
-box-shadow: 0 0 0 0 !important;
-
+.btn.login_btn {
+    background: #ffaf7b;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
 }
 
-.remember{
-color: white;
+.btn.login_btn:hover {
+    background: #d76d77;
 }
 
-.remember input
-{
-width: 20px;
-height: 20px;
-margin-left: 15px;
-margin-right: 5px;
+.card-footer {
+    text-align: center;
+    margin-top: 5px;
 }
 
-.login_btn{
-color: black;
-background-color: #FFC312;
-width: 100px;
+.card-footer .links a {
+    color: #ffaf7b;
+    text-decoration: none;
 }
 
-.login_btn:hover{
-color: black;
-background-color: white;
-}
-
-.links{
-color: white;
-}
-
-.links a{
-margin-left: 4px;
+.card-footer .links a:hover {
+    text-decoration: underline;
 }
